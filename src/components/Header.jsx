@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import amazonLogo from '../../public/assets/amazonLogo.png';
 import Sidebar from './Sidebar';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -20,7 +19,7 @@ function Header() {
         <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
           <div className="mr-5 mt-2 flex items-center flex-grow sm:flex-grow-0">
             <Image
-              src={amazonLogo}
+              src="https://links.papareact.com/f90"
               onClick={() => router.push('/')}
               width={150}
               height={40}
