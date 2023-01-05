@@ -7,6 +7,7 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/outline';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 function Header() {
   const router = useRouter();
@@ -48,7 +49,7 @@ function Header() {
 
           {/* Right */}
           <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-            <div className="link cursor-pointer">
+            <div onClick={() => signIn()} className="link cursor-pointer">
               <p className="hover:underline">Sign in</p>
               <p className="font-extrabold md:text-sm">Account & Lists</p>
             </div>
