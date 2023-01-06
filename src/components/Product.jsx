@@ -1,17 +1,56 @@
 import Currency from 'react-currency-formatter';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { StarIcon } from '@heroicons/react/solid';
+import { toast } from 'react-toastify';
+import { addToBasket } from '../slices/basketSlice';
 
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 
 function Product({ id, title, price, description, category, image }) {
+  const dispatch = useDispatch();
   const [rating] = useState(
     Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1) + MIN_RATING)
   );
 
   const [hasPrime] = useState(Math.random() < 0.5);
+
+  function addItemToBasket() {
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      rating,
+      hasPrime,
+    };
+
+    // Sending the product via an action to the redux store (= basket "slice")
+    dispatch(addToBasket(product));
+
+    toast.success(
+      <>
+        <span className="font-bold">Added to basket!</span>
+        <br />
+        {product.title.slice(0, 30)}
+        {product.title.length > 30 ? '…' : ''}
+      </>,
+      {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        draggablePercent: 20,
+        progress: undefined,
+      }
+    );
+  }
 
   return (
     <div className="relative flex flex-col m-5 bg-white z-30 p-10 growing-hover">
@@ -49,7 +88,9 @@ function Product({ id, title, price, description, category, image }) {
         </div>
       )}
 
-      <button className="mt-auto button">Add to basket</button>
+      <button onClick={addItemToBasket} className="mt-auto button">
+        Add to basket
+      </button>
     </div>
   );
 }

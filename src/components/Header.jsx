@@ -7,12 +7,15 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
+import { selectItems } from '../slices/basketSlice';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 function Header() {
   const { data: session } = useSession();
   const router = useRouter();
   const [sidebar, setSidebar] = useState(false);
+  const items = useSelector(selectItems);
 
   return (
     <>
@@ -68,9 +71,11 @@ function Header() {
               className="relative link flex items-center"
             >
               <span
-                className={`absolute top-0 right-0 md:right-10 h-4  bg-yellow-400 text-center rounded-full text-black font-bold`}
+                className={`absolute top-0 right-0 md:right-10 h-4 ${
+                  items.length >= 10 ? 'w-6' : 'w-4'
+                } bg-yellow-400 text-center rounded-full text-black font-bold`}
               >
-                1
+                {items.length}
               </span>
               <ShoppingCartIcon className="h-10" />
               <p className="hidden md:inline font-extrabold md:text-sm mt-2">
