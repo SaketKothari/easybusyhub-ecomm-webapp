@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { StarIcon } from '@heroicons/react/solid';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { addToBasket } from '../slices/basketSlice';
 
 const MIN_RATING = 1;
@@ -40,11 +41,11 @@ function Product({ id, title, price, description, category, image }) {
         {product.title.length > 30 ? '…' : ''}
       </>,
       {
-        position: 'top-right',
-        autoClose: 1500,
+        position: 'bottom-right',
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: false,
+        pauseOnHover: true,
         draggable: true,
         draggablePercent: 20,
         progress: undefined,
@@ -87,10 +88,10 @@ function Product({ id, title, price, description, category, image }) {
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}
-
       <button onClick={addItemToBasket} className="mt-auto button">
         Add to basket
       </button>
+      <ToastContainer />
     </div>
   );
 }
