@@ -3,9 +3,12 @@ import Header from '../components/Header';
 import CheckoutProduct from '../components/CheckoutProduct';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
+import { groupBy } from 'lodash';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function Checkout() {
   const items = useSelector(selectItems);
+  const groupedItems = Object.values(groupBy(items, 'id'));
 
   return (
     <div className="bg-gray-100">
@@ -20,33 +23,40 @@ function Checkout() {
             height={250}
             objectFit="contain"
           />
-        </div>
 
-        <div className="flex flex-col p-5 space-y-50 bg-white">
-          <h1
-            className={`text-3xl ${
-              items.length > 0 ? 'border-b pb-4' : 'pb-2'
-            }`}
-          >
-            {items.length === 0
-              ? 'Your Amazon Basket is empty.'
-              : 'Shopping Basket'}
-          </h1>
+          <div className="flex flex-col p-5 space-y-50 bg-white">
+            <h1
+              className={`text-3xl ${
+                items.length > 0 ? 'border-b pb-4' : 'pb-2'
+              }`}
+            >
+              {items.length === 0
+                ? 'Your Amazon Basket is empty.'
+                : 'Shopping Basket'}
+            </h1>
 
-          {items.map((item, i) => (
-            <CheckoutProduct
-              key={i}
-              id={item.id}
-              title={item.title}
-              rating={item.rating}
-              price={item.price}
-              description={item.description}
-              category={item.category}
-              image={item.image}
-              hasPrime={item.hasPrime}
-              quantity={item.length}
-            />
-          ))}
+            <TransitionGroup>
+              {groupedItems.map((group, i) => (
+                <CSSTransition
+                  key={group[0].image}
+                  timeout={500}
+                  classNames="item"
+                >
+                  <CheckoutProduct
+                    id={group[0].id}
+                    title={group[0].title}
+                    rating={group[0].rating}
+                    price={group[0].price}
+                    description={group[0].description}
+                    category={group[0].category}
+                    image={group[0].image}
+                    hasPrime={group[0].hasPrime}
+                    quantity={group.length}
+                  />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          </div>
         </div>
 
         {/* Right */}

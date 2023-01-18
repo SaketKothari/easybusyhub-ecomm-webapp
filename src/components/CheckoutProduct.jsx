@@ -20,6 +20,8 @@ function CheckoutProduct(props) {
   const hasPrime = props.hasPrime;
   const quantity = props.quantity;
 
+  const total = price * quantity;
+
   function addItemToBasket() {
     const product = {
       id,
@@ -61,8 +63,9 @@ function CheckoutProduct(props) {
             ))}
         </div>
         <p className="text-xs my-2 line-clamp-3">{description}</p>
+        {/* {quantity} × <Currency quantity={price * 71} currency="INR" /> ={" "} */}
         <span className="font-bold">
-          <Currency quantity={price * 71} currency="INR" />
+          <Currency quantity={total * 71} currency="INR" />
         </span>
         {hasPrime && (
           <div className="flex items-center space-x-2">
