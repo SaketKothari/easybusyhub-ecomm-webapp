@@ -2,7 +2,11 @@ import { MinusSmIcon, PlusIcon, StarIcon } from '@heroicons/react/solid';
 import Currency from 'react-currency-formatter';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { addToBasket, removeFromBasket } from '../slices/basketSlice';
+import {
+  addToBasket,
+  removeFromBasket,
+  removeGroupedFromBasket,
+} from '../slices/basketSlice';
 
 function CheckoutProduct(props) {
   const dispatch = useDispatch();
@@ -34,6 +38,10 @@ function CheckoutProduct(props) {
 
   function removeItemFromBasket() {
     dispatch(removeFromBasket({ id }));
+  }
+
+  function removeGroupFromBasket() {
+    dispatch(removeGroupedFromBasket({ id }));
   }
 
   return (
@@ -82,7 +90,9 @@ function CheckoutProduct(props) {
             <PlusIcon className="h-5 text-black" />
           </button>
         </div>
-        <button className="button">Remove from Basket</button>
+        <button className="button" onClick={removeGroupFromBasket}>
+          Remove from Basket
+        </button>
       </div>
     </div>
   );
