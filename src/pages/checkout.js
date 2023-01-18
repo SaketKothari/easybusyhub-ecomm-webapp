@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import Header from '../components/Header';
 import CheckoutProduct from '../components/CheckoutProduct';
+import { useSession } from 'next-auth/react';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import { groupBy } from 'lodash';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import Currency from 'react-currency-formatter';
 
 function Checkout() {
   const items = useSelector(selectItems);
+  const { data: session } = useSession();
   const groupedItems = Object.values(groupBy(items, 'id'));
 
   return (
@@ -60,7 +63,32 @@ function Checkout() {
         </div>
 
         {/* Right */}
-        <div></div>
+        <CSSTransition
+          in={items.length > 0}
+          timeout={300}
+          classNames="disappear"
+          unmountOnExit
+        >
+          <div className="flex flex-col bg-white p-10 shadow-md">
+            <h2 className="whitespace-nowrap">
+              Subtotal ({items.length} items):{' '}
+              <span className="font-bold">
+                {/* <Currency quantity={total * 71} currency="INR" /> */}
+              </span>
+            </h2>
+
+            <button
+              role="link"
+              disabled={!session}
+              className={`button mt-2 ${
+                !session &&
+                'from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed hover:from-gray-300'
+              }`}
+            >
+              {!session ? 'Sign in to checkout' : 'Proceed to checkout'}
+            </button>
+          </div>
+        </CSSTransition>
       </main>
     </div>
   );
