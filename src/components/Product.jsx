@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { StarIcon } from '@heroicons/react/solid';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { addToBasket } from '../slices/basketSlice';
 
 const MIN_RATING = 1;
@@ -91,7 +90,6 @@ function Product({ id, title, price, description, category, image }) {
       <button onClick={addItemToBasket} className="mt-auto button">
         Add to basket
       </button>
-      <ToastContainer />
     </div>
   );
 }
