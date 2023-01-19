@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
-function Header() {
+function Header(props) {
   const { data: session } = useSession();
   const router = useRouter();
   const [sidebar, setSidebar] = useState(false);
