@@ -7,12 +7,17 @@ import { selectItems, selectTotal } from '../slices/basketSlice';
 import { groupBy } from 'lodash';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Currency from 'react-currency-formatter';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
 function Checkout() {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
   const { data: session } = useSession();
   const groupedItems = Object.values(groupBy(items, 'id'));
+
+  async function createCheckoutSession() {}
 
   return (
     <div className="bg-gray-100">
@@ -80,6 +85,7 @@ function Checkout() {
 
             <button
               role="link"
+              onClick={createCheckoutSession}
               disabled={!session}
               className={`button mt-2 ${
                 !session &&
