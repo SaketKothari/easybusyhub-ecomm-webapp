@@ -9,7 +9,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Currency from 'react-currency-formatter';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 function Checkout() {
   const items = useSelector(selectItems);
@@ -17,7 +17,10 @@ function Checkout() {
   const { data: session } = useSession();
   const groupedItems = Object.values(groupBy(items, 'id'));
 
-  async function createCheckoutSession() {}
+  async function createCheckoutSession() {
+    const stripe = await stripePromise;
+
+  }
 
   return (
     <div className="bg-gray-100">
