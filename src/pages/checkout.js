@@ -8,6 +8,7 @@ import { groupBy } from 'lodash';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Currency from 'react-currency-formatter';
 import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 
 const stripePromise = loadStripe(process.env.stripe_public_key);
 

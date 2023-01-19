@@ -1,6 +1,6 @@
 import Currency from 'react-currency-formatter';
 import moment from 'moment';
-import { groupBy, isString } from 'lodash';
+import { groupBy } from 'lodash';
 import path from 'path';
 
 function Order({ id, amount, amountShipping, images, timestamp, items }) {
