@@ -1,0 +1,56 @@
+.item-enter {
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+.item-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 400ms ease-out;
+}
+
+.item-exit {
+  opacity: 1;
+  height: 550px;
+  transform: scale(1);
+  will-change: height;
+}
+
+@media (min-width: 640px) {
+  .item-exit {
+    height: 200px;
+  }
+}
+
+.item-exit-active {
+  opacity: 0;
+  transform: scale(0);
+  height: 0;
+  transition: all 500ms ease-out;
+}
+
+.disappear-enter {
+  opacity: 0;
+  transform: translateX(300px);
+}
+
+.disappear-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 400ms ease-out;
+}
+
+.disappear-exit {
+  opacity: 1;
+  will-change: width;
+  width: 300px;
+  transform: translateX(0);
+}
+
+.disappear-exit-active {
+  opacity: 0;
+  width: 0;
+  transform: translateX(300px);
+  transition: all 500ms ease-out;
+}
