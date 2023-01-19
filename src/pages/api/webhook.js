@@ -60,7 +60,7 @@ export default async (req, res) => {
 
       // Fulfill the order => put it inside firebase db
       return fulfillOrder(session)
-        .then(() => res.status(200))
+        .then(() => res.status(200).json({ received: true }))
         .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
     }
   }
