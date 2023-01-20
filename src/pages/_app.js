@@ -5,6 +5,16 @@ import '../styles/custom.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { SessionProvider } from 'next-auth/react';
+import StorageService from '../services/StorageService';
+import { hydrate } from '../slices/basketSlice';
+
+store.subscribe(() => {
+  StorageService.set('basket', JSON.stringify(store.getState().basket));
+});
+
+let basket = StorageService.get('basket');
+basket = basket ? JSON.parse(basket) : { items: [] };
+store.dispatch(hydrate(basket));
 
 const MyApp = ({ Component, pageProps }) => {
   return (
