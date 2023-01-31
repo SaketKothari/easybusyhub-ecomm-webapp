@@ -26,11 +26,11 @@ function Order({ id, amount, amountShipping, images, timestamp, items }) {
     groupedImages = Object.values(
       groupBy(images.map((image) => path.basename(image)))
     ).map((group) => [group.length, group[0]]);
-    console.log(1, groupedImages);
+    // console.log(1, groupedImages);
   } else {
     // All clean here, just parse the text value into an array, because it was stringified in the firestore DB ( "[2,'imageA.jpg']"  ->  [2, 'imageA.jpg'] )
     groupedImages = [...images.map((image) => JSON.parse(image))];
-    console.log(2, groupedImages);
+    // console.log(2, groupedImages);
   }
 
   return (
