@@ -49,5 +49,10 @@ export async function getServerSideProps(context) {
     (res) => res.json()
   );
 
-  return { props: { products } };
+  return {
+    props: {
+      products: products,
+      session: session,
+    },
+  };
 }

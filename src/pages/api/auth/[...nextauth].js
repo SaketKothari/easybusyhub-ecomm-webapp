@@ -14,6 +14,19 @@ export const authOptions = {
     //   clientSecret: process.env.FACEBOOK_SECRET,
     // }),
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user.username = session?.user?.name
+        .split(' ')
+        .join('')
+        .toLocaleLowerCase();
+
+      session.user.uid = token.sub;
+      return session;
+    },
+  },
+
+  secret: process.env.NEXTAUTH_URL,
 };
 
 export default NextAuth(authOptions);
