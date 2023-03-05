@@ -49,7 +49,12 @@ function CheckoutProduct(props) {
   return (
     <div className="block py-4 sm:grid sm:grid-cols-5 my-16 sm:my-3">
       <div className="text-center sm:text-left">
-        <Image src={image} width={200} height={200} objectFit="contain" />
+        <Image
+          src={image}
+          width={200}
+          height={200}
+          className="object-contain"
+        />
       </div>
 
       {/* Middle */}
