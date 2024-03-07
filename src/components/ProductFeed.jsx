@@ -20,7 +20,7 @@ function ProductFeed({ products }) {
       {products.length > 0 && (
         <img
           src="https://links.papareact.com/dyz"
-          alt=""
+          alt="banner-image"
           className="md:col-span-full"
         />
       )}

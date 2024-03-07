@@ -1,6 +1,6 @@
 import Currency from 'react-currency-formatter';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { StarIcon } from '@heroicons/react/solid';
 import { toast } from 'react-toastify';
@@ -11,11 +11,15 @@ const MAX_RATING = 5;
 
 function Product({ id, title, price, description, category, image }) {
   const dispatch = useDispatch();
-  const [rating] = useState(
-    Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1) + MIN_RATING)
-  );
+  const [rating, setRating] = useState(1);
+  const [hasPrime, setHasPrime] = useState(true);
 
-  const [hasPrime] = useState(Math.random() < 0.5);
+  useEffect(() => {
+    setRating(
+      Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
+    );
+    setHasPrime(Math.random() < 0.5);
+  }, []);
 
   function addItemToBasket() {
     const product = {
@@ -58,7 +62,13 @@ function Product({ id, title, price, description, category, image }) {
         {category}
       </p>
 
-      <Image src={image} width={200} height={200} className="object-contain" />
+      <Image
+        alt="product-img"
+        src={image}
+        width={200}
+        height={200}
+        style={{ objectFit: 'contain' }}
+      />
 
       <h4 className="my-3">{title}</h4>
 
@@ -70,7 +80,7 @@ function Product({ id, title, price, description, category, image }) {
           ))}
       </div>
 
-      <p className="text-xs my-2 line-clamp-2">{description}</p>
+      <div className="text-xs my-2 line-clamp-2">{description}</div>
 
       <div className="mb-5">
         <Currency quantity={price * 71} currency="INR" />
@@ -80,11 +90,11 @@ function Product({ id, title, price, description, category, image }) {
         <div className="flex items-center space-x-2 -mt-5">
           <img
             loading="lazy"
-            className="w-12"
-            src="https://links.papareact.com/fdw"
+            className="mt-2 mb-2 w-12"
+            src="/primeLogo.png"
             alt="Prime-logo"
           />
-          <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
+          <div className="text-xs text-gray-500">FREE Next-day Delivery</div>
         </div>
       )}
       <button onClick={addItemToBasket} className="mt-auto button">

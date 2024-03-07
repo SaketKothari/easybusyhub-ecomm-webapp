@@ -40,6 +40,28 @@ export default async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     shipping_rates: ['shr_1MRqezSCmRpGXuQS0uzV1AVT'], // Created fees in Stripe's dashboard
+    //   shipping_options: [
+    //     {
+    //       shipping_rate_data: {
+    //         type: 'fixed_amount',
+    //         fixed_amount: {
+    //           amount: 70,
+    //           currency: 'inr',
+    //         },
+    //         display_name: 'Free shipping',
+    //         delivery_estimate: {
+    //           minimum: {
+    //             unit: 'business_day',
+    //             value: 5,
+    //           },
+    //           maximum: {
+    //             unit: 'business_day',
+    //             value: 7,
+    //           },
+    //         },
+    //       },
+    //     },
+    // ],
     shipping_address_collection: {
       allowed_countries: ['IN', 'GB', 'US', 'CA', 'FR'], // RTFM!
     },

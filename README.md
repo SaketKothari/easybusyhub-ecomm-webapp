@@ -1,4 +1,4 @@
-# Amazon-Clone
+# EasyBusyHub - Ecommerce Webapp
 
 ### [Live Site](https://amazon-next-saketkothari.vercel.app)
 

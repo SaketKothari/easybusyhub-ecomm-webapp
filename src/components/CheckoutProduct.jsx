@@ -50,6 +50,7 @@ function CheckoutProduct(props) {
     <div className="block py-4 sm:grid sm:grid-cols-5 my-16 sm:my-3">
       <div className="text-center sm:text-left">
         <Image
+          alt="checkout-img"
           src={image}
           width={200}
           height={200}
